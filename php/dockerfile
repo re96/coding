@@ -1,0 +1,15 @@
+FROM php:7.4.25-fpm
+
+RUN mkdir -p /idus/html
+
+# 기본 프로그램 설치
+RUN apt-get -y update && apt-get -y install git curl unzip
+
+# Composer 설치
+RUN cd ~
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
+
+# MySQL extention
+RUN docker-php-ext-install pdo pdo_mysql
+
+EXPOSE 9000

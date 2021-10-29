@@ -1,0 +1,1561 @@
+{
+	"info": {
+		"_postman_id": "e41b260a-c484-4e35-b6e1-9fb204ab5172",
+		"name": "PHP 과제",
+		"description": "IDUS 백패커 PHP 코딩 테스트입니다.\n\nDocker WSL2 환경(Windows, MacOS) 에서는 외부 볼륨 이슈로 인해 속도 저하가 있습니다. 참고 부탁드립니다.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "여러 회원 목록 조회",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/users?perpage=&page=&name=&email=",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "perpage",
+							"value": "",
+							"description": "페이지당 출력할 회원 수 (선택)  \n기본값: 20"
+						},
+						{
+							"key": "page",
+							"value": "",
+							"description": "출력할 페이지 (선택)  \n기본값: 1"
+						},
+						{
+							"key": "name",
+							"value": "",
+							"description": "회원 이름 (선택)  \n조회할 회원의 이름입니다."
+						},
+						{
+							"key": "email",
+							"value": "",
+							"description": "회원 이메일 (선택)  \n조회할 회원의 이메일입니다."
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "회원 목록 조회",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/users",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.3"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.25"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Oct 2021 07:31:02 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"total\": 2,\n    \"data\": [\n        {\n            \"id\": 2,\n            \"name\": \"테스터\",\n            \"nickname\": \"tester\",\n            \"phone\": \"01078901234\",\n            \"email\": \"tester@tester.com\",\n            \"gender\": null,\n            \"latestOrder\": {\n                \"id\": 2,\n                \"ordNo\": \"11W73WYCCKH7\",\n                \"productName\": \"호두나무 카빙 원목국자\",\n                \"paymentTime\": \"2021-10-30 08:12:05\",\n                \"orderTime\": \"2021-10-29 15:59:09\"\n            }\n        },\n        {\n            \"id\": 1,\n            \"name\": \"홍길동\",\n            \"nickname\": \"gdhong\",\n            \"phone\": \"01012345678\",\n            \"email\": \"test@test.com\",\n            \"gender\": \"M\",\n            \"latestOrder\": null\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "회원 가입",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "",
+							"description": "회원 이름 (필수)  \n한글, 영문 대소문자만 가능하며, 최대 20자까지 입력 가능합니다.",
+							"type": "text"
+						},
+						{
+							"key": "nickname",
+							"value": "",
+							"description": "회원 별명 (필수)  \n영문 소문자만 가능하며, 최대 30자까지 입력 가능합니다.",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "",
+							"description": "회원 비밀번호 (필수)  \n영문 대문자, 영문 소문자, 특수 문자, 숫자를 각 1개 이상 씩 포함해야 하며, 최소 10자 이상으로 입력 가능합니다.",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "",
+							"description": "회원 전화번호 (필수)  \n숫자만 가능하며, 최대 20자까지 입력 가능합니다.",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "",
+							"description": "회원 이메일 (필수)  \n이메일 형식이어야 하며, 최대 100자 까지 입력 가능합니다.",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "",
+							"description": "회원 성별 (선택)  \n남자(M), 여자(F)로 입력 가능합니다.",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{domain}}/users",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "회원 가입 완료",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "홍길동",
+									"description": "회원 이름 (필수)  \n한글, 영문 대소문자만 가능하며 최대 20자까지 입력 가능합니다.",
+									"type": "text"
+								},
+								{
+									"key": "nickname",
+									"value": "gdhong",
+									"description": "회원 별명 (필수)  \n영문 소문자만 가능하며 최대 30자까지 입력 가능합니다.",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Test1234!@",
+									"description": "회원 비밀번호 (필수)  \n영문 대문자, 영문 소문자, 특수 문자, 숫자를 각 1개 이상 씩 포함해야 하며, 최소 10자 이상으로 입력 가능합니다.",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "01012345678",
+									"description": "회원 전화번호 (필수)  \n숫자만 가능하며, 최대 20자까지 입력 가능합니다.",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@test.com",
+									"description": "회원 이메일 (필수)  \n이메일 형식이어야 하며, 최대 100자 까지 입력 가능합니다.",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "M",
+									"description": "회원 성별 (선택)  \n남자(M), 여자(F)로 입력 가능합니다.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/users",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.3"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.25"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Oct 2021 06:41:16 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"회원 가입이 완료되었습니다.\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"홍길동\",\n        \"nickname\": \"gdhong\",\n        \"phone\": \"01012345678\",\n        \"email\": \"test@test.com\",\n        \"gender\": \"M\"\n    }\n}"
+				},
+				{
+					"name": "이메일 중복 예외",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "홍길동",
+									"description": "회원 이름 (필수)  \n한글, 영문 대소문자만 가능하며 최대 20자까지 입력 가능합니다.",
+									"type": "text"
+								},
+								{
+									"key": "nickname",
+									"value": "gdhong",
+									"description": "회원 별명 (필수)  \n영문 소문자만 가능하며 최대 30자까지 입력 가능합니다.",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Test1234!@",
+									"description": "회원 비밀번호 (필수)  \n영문 대문자, 영문 소문자, 특수 문자, 숫자를 각 1개 이상 씩 포함해야 하며, 최소 10자 이상으로 입력 가능합니다.",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "01012345678",
+									"description": "회원 전화번호 (필수)  \n숫자만 가능하며, 최대 20자까지 입력 가능합니다.",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@test.com",
+									"description": "회원 이메일 (필수)  \n이메일 형식이어야 하며, 최대 100자 까지 입력 가능합니다.",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "M",
+									"description": "회원 성별 (선택)  \n남자(M), 여자(F)로 입력 가능합니다.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/users",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.3"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.25"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Oct 2021 06:41:56 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"이미 존재하는 이메일입니다.\"\n}"
+				},
+				{
+					"name": "입력값 오류",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "홍길동",
+									"description": "회원 이름 (필수)  \n한글, 영문 대소문자만 가능하며 최대 20자까지 입력 가능합니다.",
+									"type": "text"
+								},
+								{
+									"key": "nickname",
+									"value": "길동이",
+									"description": "회원 별명 (필수)  \n영문 소문자만 가능하며 최대 30자까지 입력 가능합니다.",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "test1234",
+									"description": "회원 비밀번호 (필수)  \n영문 대문자, 영문 소문자, 특수 문자, 숫자를 각 1개 이상 씩 포함해야 하며, 최소 10자 이상으로 입력 가능합니다.",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "01012345678",
+									"description": "회원 전화번호 (필수)  \n숫자만 가능하며, 최대 20자까지 입력 가능합니다.",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test@test.com",
+									"description": "회원 이메일 (필수)  \n이메일 형식이어야 하며, 최대 100자 까지 입력 가능합니다.",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "남자",
+									"description": "회원 성별 (선택)  \n남자(M), 여자(F)로 입력 가능합니다.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/users",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"status": "Unprocessable Entity",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.3"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.25"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Oct 2021 06:42:45 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"입력된 데이터가 잘못되었습니다.\",\n    \"errors\": {\n        \"nickname\": [\n            \"별명은 영문 소문자만 가능합니다.\"\n        ],\n        \"password\": [\n            \"비밀번호는 최소 10자 이상만 가능합니다.\",\n            \"비밀번호는 영문 대문자, 영문 소문자, 특수 문자, 숫자를 각 1개 이상씩 포함해야 합니다.\"\n        ],\n        \"gender\": [\n            \"성별은 남자(M)와 여자(F)만 입력 가능합니다.\"\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "회원 로그인 (인증)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "",
+							"description": "회원 이메일 (필수)  \n가입 시 입력한 회원 이메일입니다.",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "",
+							"description": "회원 비밀번호 (필수)  \n가입 시 입력한 회원 비밀번호입니다.",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{domain}}/auth/login",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "회원 로그인 완료",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test@test.com",
+									"description": "회원 이메일",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Test1234!@",
+									"description": "회원 비밀번호",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/auth/login",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.3"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.25"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Oct 2021 06:13:58 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNmI5ODYxMDhiZjBkNjQwMmM2NTMwNWE2Yzk5NzE1MzdkNjZhY2JjOGIyNDZkYzQ5OGY3OTQzODhjYTQ0Y2E4MTA2MTU2YTlhMTEzZDZhOWQiLCJpYXQiOjE2MzU0ODgwMzguNjg0MDE0LCJuYmYiOjE2MzU0ODgwMzguNjg0MDE3LCJleHAiOjE2NjcwMjQwMzguNjI4OTYxLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.nt47z6XQArcCNKJP4YCFy9yoFQccCEUAc-0QdApiz6etHS0O2VJHOnMbamG0zGxI-vb3Twhto5OgyrrOwbZBjVi5W4WwijRGf4NUgrakk4kiVSKn_47deQJwoCMTOQfvDK_VOeUiLWxQveX26NHISUNRtKc-k_WSFgfbLLYXUWgDObI-awcnZb-wd_m0dlkAJhzYvdM2wyy_QkWnfl1PVsHLRHE4oUbZl71b5gwiWDe7KLgxpvLCO5duzqGg_Jf-25rlzq0vZvIHSeqIsyEye3jCc76j9BPJb34RNw_wR5-VZPFoxHZaZj51JLNkY5qIgUqGR34wD2Q5yzNzS1jXC1x84VIGloMwDG883dxwNjH4sxr_i9ShGtfqOAZhTlM8kLJRiWsLqoHz7HVetPgvKQzeL-RqLc_2YjH8orvpnCPquTnDzk7aZFGkguTgNGL_OaEbQ53pC1_W4sPC13Uf9t9dCNR4FgEwp-9neb49uD13sWj3vxEgSs4Ad1-lCG1cXRfuL48NEqO68Lx4JXvS0M9dhD7020aG8rE7naqpxtlFytgPK2AyOeaoGsSEHTeFajtlxHyOkt28U2eGEY3hoyBnZHBhtGixuMjKDVEuSnxtjYqUIf5srluViSFWhSJNOKxDxBo8xQdNG4ZQBmWXl89vEGzVxFnkPLFOAZ6Pw5c\"\n}"
+				},
+				{
+					"name": "회원 로그인 실패",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "test@test.com",
+									"description": "회원 이메일",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"description": "회원 비밀번호",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/auth/login",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.3"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.25"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Oct 2021 06:18:10 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"이메일 또는 비밀번호가 일치하지 않습니다.\"\n}"
+				},
+				{
+					"name": "입력값 오류",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "",
+									"description": "회원 이메일",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"description": "회원 비밀번호",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/auth/login",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "Unprocessable Entity",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.3"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.25"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Oct 2021 06:19:00 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "57"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"입력된 데이터가 잘못되었습니다.\",\n    \"errors\": {\n        \"email\": [\n            \"이메일은 필수 입력 항목입니다.\"\n        ],\n        \"password\": [\n            \"비밀번호는 필수 입력 항목입니다.\"\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "회원 로그인 (인증) (private key)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"description": "oauth grant type (필수, 고정값)",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "2",
+							"description": "client ID (필수, 고정값)",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "<oauth-secret-key>",
+							"description": "client secret key (필수, 고정값)",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"description": "회원 이메일 (필수)",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "",
+							"description": "회원 비밀번호 (필수)",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{domain}}/oauth/token",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "회원 로그인 완료",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{oauth-secret-key}}",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "test@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Test1234!@",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/oauth/token",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.3"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.25"
+						},
+						{
+							"key": "pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-store, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Oct 2021 06:25:58 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 7199,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiYzA1OWEzOTkxMDIzNjdjYjY2NzA1Y2MzOGM5ZDU5MmI2ODUwYTgxZmQ3ZmJhNGJjOTc1OThhNTk4OGE4ZThiYzI1OTc1MmI2ZGM0MTQ2NDYiLCJpYXQiOjE2MzU0ODg3NTguMTgyNzExLCJuYmYiOjE2MzU0ODg3NTguMTgyNzE1LCJleHAiOjE2MzU0OTU5NTcuNzA2MDQyLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.UgFlLsjQl8fr2ZHv5izDkWGYc3xtIxIRMqPNIdBHJ0dCjZQltBXlgly5r2Ht2XsVFaTsE9I9fpxTKQXOmfwSB9gqqDEyMwfdNOckVgyZMyoZzS20QdrD7WtVOc58-Uh91RbLcc-Fcn7kPtj3LnmWBMjL0XYAv1PuSvQiFwqjzkVA5qJjcHhJ1dkka7q3-IOQO4_g_ZGc4FO26tgHsqTEarFs8baDzGh6LsO-Jti6RoL_3M3BmbYEvuZoGWOx9WCYwK_LkZGbi7p-KuZ_5dkdI842V6TRrIlUKr4tb3omgV_YBE6Y-Igg_WNPqAujbG6y7Lr6d7UWGYeAlMDd-nks3D_5TDm6VLQFETBh4dhxzYFAWdlxFPIBLjy17fSXC9zZRCHAEHyQYZc4HSGxdFxqGAstGEPysUrICiMA4y5pmh6mwuqYbUI2-pj3yiZMKLRsQe8jDUKyPJwW73tJjaZN21TsEyG1RP3HddFL7j_i0qR_0FreJN9V6drdeUnKVxTC5C8llchgoWFhYavnnwhcMJtFpoBV0hxySQx5S4mBBk8qZJRaDzaPNc-ej4uhs3vFWjsjs99AXbwoKDhGG9Ed1V-76X9KTuAosb5qiC2ZDvaxLQzD9WCWIY5loiPWmTPkgzSpUreb2XQS2LcFkbxF2Eo7Qu4bezFI6q-FSa6Cip4\",\n    \"refresh_token\": \"def502005257737d05a9e461924aa6264789527b0e5e9d3ebd44635c4660f5316fca92f91e5ae7198d72d5791a6855b0820e07cf4dcfb626ef6b0e67eb27a117b958a78e1e17c5b76a6b6295e9a2c44a79fe9b909360207eb7efb8641224abf58f4d37499905841b1e786c6946a090bc4c96014dac197e97dcbfec373cb8934dcad15bdda176450bbf8166a690366b94ee83ae42af788d4730457243fe3fe9c57244638dba7c245ff96b50756bdb97b22f25dd1ccfda5d606f24848edabf9fbf44385582d663cdb0e1538b62f678ed8dc279b09485dd41daedd4fb4629223107f961ba9d2cc71df6744e5f61fc044ce23db706658c994e2ff698e583087d7f28bbe952becdc466b066e9836da16145a3653cec7caf82c7e943b027a14efd66f05ac287a15d059bb08bd2d36df2879cad7b2b4b7f7f382dbe3dafc4d80eb33f3af08b8ef2dbd7b2b8832fa756a144e453edce3c8a3294872242ff1efe6f1ff052f9\"\n}"
+				},
+				{
+					"name": "회원 로그인 실패",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{oauth-secret-key}}",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "test@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/oauth/token",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.3"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.25"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Oct 2021 06:26:28 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"invalid_grant\",\n    \"error_description\": \"The user credentials were incorrect.\",\n    \"message\": \"The user credentials were incorrect.\"\n}"
+				},
+				{
+					"name": "입력값 오류",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{oauth-secret-key}}",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/oauth/token",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.3"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.25"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Oct 2021 06:27:00 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"error\": \"invalid_request\",\n    \"error_description\": \"The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed.\",\n    \"hint\": \"Check the `username` parameter\",\n    \"message\": \"The request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once, or is otherwise malformed.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "회원 로그아웃",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "Access Token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/auth/logout",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "회원 로그아웃 완료",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/auth/logout",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.3"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.25"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Oct 2021 06:32:00 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"로그아웃이 완료되었습니다.\"\n}"
+				},
+				{
+					"name": "회원 로그아웃 실패",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/auth/logout",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.3"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.25"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Oct 2021 06:32:16 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"회원 인증이 필요합니다.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "단일 회원 주문 목록 조회",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/users/2/orders",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"users",
+						"2",
+						"orders"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "회원 주문 목록 조회",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/users/2/orders",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"users",
+								"2",
+								"orders"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.3"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.25"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Oct 2021 07:23:44 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 2,\n            \"ordNo\": \"11W73WYCCKH7\",\n            \"productName\": \"호두나무 카빙 원목국자\",\n            \"paymentTime\": \"2021-10-30 08:12:05\",\n            \"orderTime\": \"2021-10-29 15:59:09\"\n        },\n        {\n            \"id\": 1,\n            \"ordNo\": \"11W73WFV547R\",\n            \"productName\": \"티지 우드 트레이 집들이 선물 홈카페🧡\",\n            \"paymentTime\": \"2021-10-29 15:53:12\",\n            \"orderTime\": \"2021-10-29 15:57:17\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "단일 회원 주문 생성",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "product_name",
+							"value": "",
+							"description": "제품명 (필수)  \nemoji를 포함한 모든 문자가 가능하며, 최대 100자까지 입력 가능합니다.",
+							"type": "text"
+						},
+						{
+							"key": "paid_at",
+							"value": "",
+							"description": "결제 일시 (필수)  \n제품을 결제한 일시입니다. UTC 기준 시간으로 입력이 필요한 경우 표준 포맷으로 입력 가능합니다.  \nex. 2021-10-29 15:53:12  (서버 Timezone 기준으로 설정)  \nex. 2021-10-29T15:53:12Z (UTC 기준 시간으로 설정)",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{domain}}/users/2/orders",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"users",
+						"2",
+						"orders"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "주문 생성 완료",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "product_name",
+									"value": "티지 우드 트레이 집들이 선물 홈카페🧡",
+									"description": "제품명 (필수)  \nemoji를 포함한 모든 문자가 가능하며, 최대 100자까지 입력 가능합니다.",
+									"type": "text"
+								},
+								{
+									"key": "paid_at",
+									"value": "2021-10-29 15:53:12",
+									"description": "결제 일시 (필수)  \n제품을 결제한 일시입니다. UTC 기준 시간으로 입력이 필요한 경우 표준 포맷으로 입력 가능합니다.  \nex. 2021-10-29 15:53:12  (서버 Timezone 기준으로 설정)\n      2021-10-29T15:53:12.000Z (UTC 기준 시간으로 설정)",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/users/2/orders",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"users",
+								"2",
+								"orders"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.3"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.25"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Oct 2021 06:57:17 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"주문 등록이 완료되었습니다.\",\n    \"data\": {\n        \"id\": 1,\n        \"ordNo\": \"11W73WFV547R\",\n        \"productName\": \"티지 우드 트레이 집들이 선물 홈카페🧡\",\n        \"paymentTime\": \"2021-10-29 15:53:12\",\n        \"orderTime\": \"2021-10-29 15:57:17\"\n    }\n}"
+				},
+				{
+					"name": "입력값 오류",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "product_name",
+									"value": "호두나무 카빙 원목국자",
+									"description": "제품명 (필수)  \nemoji를 포함한 모든 문자가 가능하며, 최대 100자까지 입력 가능합니다.",
+									"type": "text"
+								},
+								{
+									"key": "paid_at",
+									"value": "1234",
+									"description": "결제 일시 (필수)  \n제품을 결제한 일시입니다. UTC 기준 시간으로 입력이 필요한 경우 표준 포맷으로 입력 가능합니다.  \nex. 2021-10-29 15:53:12  (서버 Timezone 기준으로 설정)\n      2021-10-29T15:53:12Z (UTC 기준 시간으로 설정)",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/users/2/orders",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"users",
+								"2",
+								"orders"
+							]
+						}
+					},
+					"status": "Unprocessable Entity",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.3"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.25"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Oct 2021 07:08:23 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "58"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"입력된 데이터가 잘못되었습니다.\",\n    \"errors\": {\n        \"paid_at\": [\n            \"결제일시는 일시 형태만 가능합니다. (ex. 2021-10-29 16:08:22 / 2021-10-29T07:08:22Z)\"\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "단일 회원 주문 상세 조회",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{domain}}/users/2/orders/1",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"users",
+						"2",
+						"orders",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "회원 주문 상세 조회",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{domain}}/users/2/orders/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"users",
+								"2",
+								"orders",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.3"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/7.4.25"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 29 Oct 2021 07:24:39 GMT"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "57"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"ordNo\": \"11W73WFV547R\",\n        \"productName\": \"티지 우드 트레이 집들이 선물 홈카페🧡\",\n        \"paymentTime\": \"2021-10-29 15:53:12\",\n        \"orderTime\": \"2021-10-29 15:57:17\"\n    }\n}"
+				}
+			]
+		}
+	]
+}

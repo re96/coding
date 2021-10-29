@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+
+  db:
+    container_name: idus-db
+    image: mysql:latest
+    restart: always
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db/conf.d:/etc/mysql/conf.d
+      - ./db/initdb.d:/docker-entrypoint-initdb.d
+      - ./db/data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: IDUS
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: idus_dev
+      MYSQL_ROOT_PASSWORD: idus
+      TZ: Asia/Seoul
+
+  php:
+    container_name: idus-php
+    build:
+      context: ./php
+      dockerfile: dockerfile
+    depends_on:
+      - idus-db
+    restart: always
+    ports:
+      - 9000:9000
+    volumes:
+      - ./php/src:/idus/html
+    environment:
+      TZ: Asia/Seoul
+
+  web:
+    container_name: idus-web
+    build:
+      context: ./nginx
+      dockerfile: dockerfile
+    depends_on:
+      - idus-php
+    restart: always
+    ports:
+      - 80:80
+    links:
+      - idus-php
+    environment:
+      TZ: Asia/Seoul
