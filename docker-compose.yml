@@ -18,6 +18,7 @@ services:
       MYSQL_PASSWORD: idus_dev
       MYSQL_ROOT_PASSWORD: idus
       TZ: Asia/Seoul
+      LANG: en_US.UTF-8
 
   php:
     container_name: idus-php
