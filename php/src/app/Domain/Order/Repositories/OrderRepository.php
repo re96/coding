@@ -4,12 +4,10 @@ namespace App\Domain\Order\Repositories;
 
 use App\Domain\Repository;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Contracts\Support\Arrayable;
 use App\Domain\User\Contracts\UserInterface;
 use App\Domain\Order\Models\Order;
 use App\Domain\Order\Exceptions\RegisterException;
 use App\Domain\Order\Exceptions\NotFoundException;
-use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Exception;
 
